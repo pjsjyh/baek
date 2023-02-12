@@ -1,0 +1,73 @@
+mylist=[list(map(int, input().split())) for _ in range(9)]
+blank=[]
+for i in range(9):
+    for j in range(9):
+        if mylist[i][j] == 0:
+            blank.append((i, j))
+            
+def sdo(y,x):
+    while(allpass(blank)):
+        for i in range(len(blank)):
+                checkli1 = checkc(blank[i][0],blank[i][1])
+                checkli2 = checkr(blank[i][0],blank[i][1])
+                checkli3 = checks(blank[i][0],blank[i][1])
+                n = issame(checkli1, checkli2,checkli3)
+                    
+                if(len(n))==1:
+                    mylist[blank[i][0]][blank[i][1]] = n[0]
+def allpass(li):
+    for i in range(len(li)):
+            if(mylist[li[i][0]][li[i][1]]==0):
+                return True
+    return False
+                    
+        
+def issame(li1,li2, li3):
+    samenum=[]
+    for i in range(len(li2)):
+        if(li2[i] in li1):
+            samenum.append(li2[i])
+    finaln=[]
+    for i in range(len(li3)):
+        if(li3[i] in samenum):
+            finaln.append(li3[i])
+    return finaln
+    
+def checkc(y,x):
+    noli=[]
+    for i in range(1,10):
+        if(i not in mylist[y]):
+            noli.append(i)
+    return noli
+
+def checkr(y,x):
+    noli=[]
+    li=[]
+    num=[1,2,3,4,5,6,7,8,9]
+    for i in range(0,9):
+        if(mylist[i][x] in num):
+            li.append(mylist[i][x] )
+    for i in range(1,10):
+        if(i not in li):
+            noli.append(i)
+    return noli
+def checks(y,x):
+    sty = y//3*3
+    stx=x//3*3
+    noli=[]
+    num=[1,2,3,4,5,6,7,8,9]
+    li=[]
+    for i in range(sty,sty+3):
+        for j in range(stx,stx+3):
+            if(mylist[i][j] in num):
+                li.append(mylist[i][j])
+    for i in range(1,10):
+        if(i not in li):
+            noli.append(i)
+    return noli
+
+
+    
+sdo(0,0)
+for i in range(9):
+    print(mylist[i][0], mylist[i][1], mylist[i][2], mylist[i][3],mylist[i][4],mylist[i][5],mylist[i][6],mylist[i][7],mylist[i][8])
